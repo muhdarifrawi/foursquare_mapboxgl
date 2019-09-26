@@ -8,3 +8,7 @@ let map = new mapboxgl.Map({
     center: [103.8198, 1.3521],
     zoom: 10.5
 });
+
+let m = new mapboxgl.Marker()
+   .setLngLat([103.8198, 1.3521])
+   .addTo(map);
