@@ -1,5 +1,6 @@
 /*global mapboxgl*/
 /*global axios*/
+/*global $*/
 
 /*Foursquare API. Constants are kept Capsed to differentiate them from Variables.*/
 const API_URL_FSQ = "https://api.foursquare.com/v2";
@@ -32,7 +33,17 @@ function testFourSqAPI(){
     })
 .then(function(response){
     console.log(response.data.response.groups[0].items);
+    console.log(response.data.response.groups[0].items[0].venue.name);
 });
 
 }
 
+//create a function where if  i click search, it will return names to me.
+
+$("#search-button").click(function(){
+    console.log("clicked");
+    
+    let searchQuery = $("#search-box").val();
+    console.log(searchQuery);
+   
+});
