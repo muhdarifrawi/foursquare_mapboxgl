@@ -45,5 +45,28 @@ $("#search-button").click(function(){
     
     let searchQuery = $("#search-box").val();
     console.log(searchQuery);
+    
+    axios.get(API_URL_FSQ + "/venues/explore", {
+        params: {
+            "client_id": CLIENT_ID,
+            "client_secret": CLIENT_SECRET, 
+            "v":'20180323' , 
+            "limit": 10 ,
+            "ll": '1.3521, 103.8198' ,
+            "query": searchQuery
+        }
+    }).then(function(response){
+        console.log(response);
+        console.log(response.data.response.groups[0].items);
+        console.log(response.data.response.groups[0].items[0].venue.name);
+        
+        let placeList = response.data.response.groups[0].items;
+        
+        for (let places of placeList){
+            console.log(places.venue.name);
+            
+        }
+    });
+    
    
 });
