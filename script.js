@@ -46,7 +46,8 @@ $("#search-button").click(function(){
     let searchQuery = $("#search-box").val();
     console.log(searchQuery);
     
-    axios.get(API_URL_FSQ + "/venues/explore", {
+    /*Using search instead of explore*/
+    axios.get(API_URL_FSQ + "/venues/search", {
         params: {
             "client_id": CLIENT_ID,
             "client_secret": CLIENT_SECRET, 
@@ -57,18 +58,22 @@ $("#search-button").click(function(){
         }
     }).then(function(response){
         console.log(response);
-        console.log(response.data.response.groups[0].items);
-        console.log(response.data.response.groups[0].items[0].venue.name);
+        console.log(response.data.response.venues[0].name);
+        console.log(response.data.response.venues[0].location.address);
         
-        let placeList = response.data.response.groups[0].items;
+        
+        let placeList = response.data.response.venues;
+        
         $("#list").empty();
+        
         for (let places of placeList){
-            console.log(places.venue.name);
-
-            $("#list").append(`<li>${places.venue.name}</li>`);
-            $("#list").append(`<ul><li>${places.venue.location.address}</li></ul>`)
+            // console.log(places);
+            console.log(places.name);
             
-        }
+            $("#list").append(`<li>${places.name}</li>`);
+            $("#list").append(`<ul><li>${places.location.address}</li></ul>`)
+            }
+            
     });
     
    
