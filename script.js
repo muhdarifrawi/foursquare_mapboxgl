@@ -43,9 +43,6 @@ function testFourSqAPI(){
 $("#search-button").click(function(){
     console.log("clicked");
     
-    let searchQuery = $("#search-box").val();
-    console.log(searchQuery);
-    
     /*Using search instead of explore*/
     axios.get(API_URL_FSQ + "/venues/search", {
         params: {
@@ -54,7 +51,7 @@ $("#search-button").click(function(){
             "v":'20180323' , 
             "limit": 1000 ,
             "ll": '1.3521, 103.8198' ,
-            "query": searchQuery
+            "query": "supermarket"
         }
     }).then(function(response){
         console.log(response);
