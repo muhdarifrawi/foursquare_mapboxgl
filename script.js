@@ -51,7 +51,7 @@ $("#search-button").click(function(){
             "client_id": CLIENT_ID,
             "client_secret": CLIENT_SECRET, 
             "v":'20180323' , 
-            "limit": 10 ,
+            "limit": 1000 ,
             "ll": '1.3521, 103.8198' ,
             "query": searchQuery
         }
@@ -64,8 +64,9 @@ $("#search-button").click(function(){
         $("#list").empty();
         for (let places of placeList){
             console.log(places.venue.name);
-            
+
             $("#list").append(`<li>${places.venue.name}</li>`);
+            $("#list").append(`<ul><li>${places.venue.location.address}</li></ul>`)
             
         }
     });
