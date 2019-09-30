@@ -64,6 +64,7 @@ $("#search-button").click(function(){
         
         for (let places of placeList){
             console.log(places.venue.name);
+            $("#list").append(`<li>${places.venue.name}</li>`);
             
         }
     });
