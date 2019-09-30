@@ -61,9 +61,10 @@ $("#search-button").click(function(){
         console.log(response.data.response.groups[0].items[0].venue.name);
         
         let placeList = response.data.response.groups[0].items;
-        
+        $("#list").empty();
         for (let places of placeList){
             console.log(places.venue.name);
+            
             $("#list").append(`<li>${places.venue.name}</li>`);
             
         }
