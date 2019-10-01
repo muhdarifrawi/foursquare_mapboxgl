@@ -7,6 +7,8 @@ const API_URL_FSQ = "https://api.foursquare.com/v2";
 const CLIENT_ID = "KU0V5J1DMMBMFD2XR2YNPDDQKIQJE5CMIKNB32YITZTXYXL4";
 const CLIENT_SECRET = "4CDZXMM212D1JTYD0VJ055IA00G1EPIYLZRP2Q5ZR1FT3JCS";
 
+
+
 mapboxgl.accessToken="pk.eyJ1IjoibXVoZGFyaWZyYXdpIiwiYSI6ImNrMHl3dDNycTBpdDkzaHJ4cHJtdnU0YXoifQ.8ceqA9s8SqMSbVa1rsZgvg"
 
 let map = new mapboxgl.Map({
@@ -42,7 +44,24 @@ function testFourSqAPI(){
 
 $("#search-button").click(function(){
     console.log("clicked");
+     console.log($("#sheng:checkbox").prop("checked"));
+     console.log($("#fairprice:checkbox").prop("checked"));
     
+    let stores = [];
+    let shengCheck = $("#sheng:checkbox").prop("checked");
+    let fpCheck = $("#fairprice:checkbox").prop("checked");
+    
+    if (shengCheck == true){
+        stores.push($("#sheng:checkbox").attr("id"))
+    };
+    
+    if (fpCheck == true){
+        stores.push($("#fairprice:checkbox").attr("id"))
+    };
+
+    console.log(stores);
+    let each = stores.toString();
+
     /*Using search instead of explore*/
     axios.get(API_URL_FSQ + "/venues/search", {
         params: {
@@ -51,7 +70,7 @@ $("#search-button").click(function(){
             "v":'20180323' , 
             "limit": 1000 ,
             "ll": '1.3521, 103.8198' ,
-            "query": "supermarket"
+            "query": each
         }
     }).then(function(response){
         console.log(response);
