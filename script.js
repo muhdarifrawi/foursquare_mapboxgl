@@ -2,6 +2,9 @@
 /*global axios*/
 /*global $*/
 
+/* global variables */
+let all_markers = [];
+
 /*Foursquare API. Constants are kept Capsed to differentiate them from Variables.*/
 const API_URL_FSQ = "https://api.foursquare.com/v2";
 const CLIENT_ID = "KU0V5J1DMMBMFD2XR2YNPDDQKIQJE5CMIKNB32YITZTXYXL4";
@@ -28,7 +31,7 @@ function testFourSqAPI(){
             "client_id": CLIENT_ID,
             "client_secret": CLIENT_SECRET, 
             "v":'20180323' , 
-            "limit": 10 ,
+            "limit": 50,
             "ll": '1.3521, 103.8198' ,
             "query": 'coffee'
         }
@@ -40,12 +43,17 @@ function testFourSqAPI(){
 
 }
 
-//create a function where if  i click search, it will return names to me.
+// create a function where if i hover my cursor in map, it will indicate lng,lat
+map.on("mousemove", function(e){ $("#output").val(JSON.stringify(e.lngLat.wrap())) }
+    
+);
 
+
+//create a function where if  i click search, it will return names to me.
 $("#search-button").click(function(){
-    console.log("clicked");
-     console.log($("#sheng:checkbox").prop("checked"));
-     console.log($("#fairprice:checkbox").prop("checked"));
+    // console.log("clicked");
+    //  console.log($("#sheng:checkbox").prop("checked"));
+    //  console.log($("#fairprice:checkbox").prop("checked"));
     
     let stores = [];
     let shengCheck = $("#sheng:checkbox").prop("checked");
@@ -78,18 +86,33 @@ $("#search-button").click(function(){
         console.log(response.data.response.venues[0].location.address);
         
         
-        let placeList = response.data.response.venues;
-        
         $("#list").empty();
+        
+        for (let each_marker of all_markers)
+        {
+            each_marker.remove();
+        }
+        
+        let placeList = response.data.response.venues;
+        all_markers = [];
+        
+        
         
         for (let places of placeList){
             // console.log(places);
             console.log(places.name);
             
+            let marker = new mapboxgl.Marker();
+            marker.setLngLat([places.location.lng,places.location.lat]);
+            marker.addTo(map);
+            
             $("#list").append(`<li>${places.name}</li>`);
             $("#list").append(`<ul><li>${places.location.address}</li></ul>`)
+          
+            all_markers.push(marker);
+          
             }
-            
+           
     });
     
    
