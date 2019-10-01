@@ -25,6 +25,8 @@ let m = new mapboxgl.Marker()
    .setLngLat([103.8198, 1.3521])
    .addTo(map);
    
+let clickedLatLng = {};
+   
 function testFourSqAPI(){
     axios.get(API_URL_FSQ + "/venues/explore", {
         params: {
@@ -44,9 +46,21 @@ function testFourSqAPI(){
 }
 
 // create a function where if i hover my cursor in map, it will indicate lng,lat
-map.on("mousemove", function(e){ $("#output").val(JSON.stringify(e.lngLat.wrap())) }
+map.on("mousemove", function(e){ 
+    $("#output").val(JSON.stringify(e.lngLat.wrap()));
+    clickedLatLng = e.lngLat;
     
-);
+});
+
+map.on("click", function (){
+    $("#html-plot").val("longtitude: "+clickedLatLng.lng +" latitude: "+ clickedLatLng.lat);
+    
+    
+    console.log("current plot" + clickedLatLng.lat);
+    console.log("current plot" + clickedLatLng.lng);
+});
+
+
 
 
 //create a function where if  i click search, it will return names to me.
