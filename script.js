@@ -91,6 +91,13 @@ $("#reset-button").click(function(){
         each_plot.remove();
     };
     
+    $("#list").empty();
+        
+        for (let each_marker of all_markers)
+        {
+            each_marker.remove();
+        }
+    
     map.easeTo({
         zoom: 11,
         center: [103.8198, 1.3521]
