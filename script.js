@@ -22,10 +22,6 @@ let map = new mapboxgl.Map({
     zoom: 10.5
 });
 
-let m = new mapboxgl.Marker()
-   .setLngLat([103.8198, 1.3521])
-   .addTo(map);
-   
 let clickedLatLng = {};
    
 function testFourSqAPI(){
@@ -60,10 +56,12 @@ map.on("click", function (){
         each_plot.remove();
     };
     
-    
+    var el = document.createElement('div');
+    el.className = 'marker';
+   
     plot_marker = [];
     
-    let plot = new mapboxgl.Marker();
+    let plot = new mapboxgl.Marker(el);
             
             plot.setLngLat([clickedLatLng.lng,clickedLatLng.lat]);
             plot.addTo(map);
@@ -104,11 +102,11 @@ $("#search-button").click(function(){
             "client_id": CLIENT_ID,
             "client_secret": CLIENT_SECRET, 
             "v":'20180323' , 
-            "limit": 50 ,
+            "limit": 20 ,
             /* if i add radius, json file is changed*/ 
             /*taking Long, lat from clicked*/
             "ll": clickedLatLng.lat + "," + clickedLatLng.lng ,
-            "radius": 1000,
+            // "radius": 500,
             "query": each
         }
     }).then(function(response){
