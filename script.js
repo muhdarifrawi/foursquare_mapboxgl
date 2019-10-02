@@ -76,8 +76,17 @@ map.on("click", function (){
     console.log("current plot" + clickedLatLng.lng);
 });
 
+//function where clicking confirm will zoom in to  long/lat
 
+$("#confirm-button").click(function(){
+    
+});
 
+//function reset will zoom out and clear the marker
+
+$("#reset-button").click(function(){
+    
+});
 
 //create a function where if  i click search, it will return names to me.
 $("#search-button").click(function(){
@@ -97,6 +106,11 @@ $("#search-button").click(function(){
         stores.push("fairprice, FairPrice")
     };
 
+    if ($(":checkbox").prop("checked") == false){
+        alert("Please select a choice.");
+        return ; 
+    };
+    
     console.log(stores);
     let each = stores.toString();
     console.log(each);
@@ -131,6 +145,9 @@ $("#search-button").click(function(){
         let placeList = response.data.response.venues;
         all_markers = [];
         
+        if (all_markers.length == 0){
+           $("#list").append(`<li> No Results Found</li>`); 
+        };
         
         
         for (let places of placeList){
@@ -145,6 +162,7 @@ $("#search-button").click(function(){
             $("#list").append(`<ul><li>${places.location.address}</li></ul>`)
           
             all_markers.push(marker);
+            console.log(all_markers.length)
           
             }
            
@@ -152,3 +170,4 @@ $("#search-button").click(function(){
     
    
 });
+
