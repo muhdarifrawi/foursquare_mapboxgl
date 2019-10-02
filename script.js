@@ -131,7 +131,7 @@ $("#search-button").click(function(){
     console.log(stores);
     let each = stores.toString();
     console.log(each);
-
+    
     /*Using search instead of explore*/
     axios.get(API_URL_FSQ + "/venues/search", {
         params: {
@@ -146,6 +146,9 @@ $("#search-button").click(function(){
             "sortByDistance": 1,
             "section":"supermarket"
         }
+        
+        
+        
     }).then(function(response){
         // console.log(response);
         // console.log(response.data.response.venues[0].name);
@@ -162,11 +165,6 @@ $("#search-button").click(function(){
         let placeList = response.data.response.venues;
         all_markers = [];
         
-        if (all_markers.length == 0){
-           $("#list").append(`<li> No Results Found</li>`); 
-        };
-        
-        
         for (let places of placeList){
             // console.log(places);
             console.log(places.name);
@@ -177,12 +175,16 @@ $("#search-button").click(function(){
             
             $("#list").append(`<li>${places.name}</li>`);
             $("#list").append(`<ul><li>${places.location.address}</li></ul>`)
-          
+            
             all_markers.push(marker);
-            console.log(all_markers.length)
-          
+            
             }
-           
+            
+            if (all_markers.length == 0){
+              $("#list").append(`<li>No Results Found</li>`);  
+            };
+            
+           console.log(all_markers.length)
     });
     
    
