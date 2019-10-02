@@ -72,23 +72,25 @@ map.on("click", function (){
     
             plot_marker.push(plot);
             
+    map.easeTo({
+        zoom: 14,
+        center: clickedLatLng
+    });
+            
     console.log("current plot" + clickedLatLng.lat);
     console.log("current plot" + clickedLatLng.lng);
+    console.log(clickedLatLng);
 });
 
-//function where clicking confirm will zoom in to  long/lat
-
-$("#confirm-button").click(function(){
-    
-});
 
 //function reset will zoom out and clear the marker
 
 $("#reset-button").click(function(){
     
-    // map.setZoom(11);
-    // map.setCenter([103.8198, 1.3521]);
-
+    for (let each_plot of plot_marker){
+        each_plot.remove();
+    };
+    
     map.easeTo({
         zoom: 11,
         center: [103.8198, 1.3521]
