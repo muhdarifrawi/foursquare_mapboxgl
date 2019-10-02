@@ -19,7 +19,7 @@ let map = new mapboxgl.Map({
     container: "map",
     style: "mapbox://styles/mapbox/streets-v9",
     center: [103.8198, 1.3521],
-    zoom: 10.5
+    zoom: 11
 });
 
 let clickedLatLng = {};
@@ -86,6 +86,14 @@ $("#confirm-button").click(function(){
 
 $("#reset-button").click(function(){
     
+    // map.setZoom(11);
+    // map.setCenter([103.8198, 1.3521]);
+
+    map.easeTo({
+        zoom: 11,
+        center: [103.8198, 1.3521]
+    });
+
 });
 
 //create a function where if  i click search, it will return names to me.
