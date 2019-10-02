@@ -23,7 +23,7 @@ let map = new mapboxgl.Map({
 });
 
 let clickedLatLng = {};
-   
+/*   
 function testFourSqAPI(){
     axios.get(API_URL_FSQ + "/venues/explore", {
         params: {
@@ -32,7 +32,8 @@ function testFourSqAPI(){
             "v":'20180323' , 
             "limit": 50,
             "ll": '1.3521, 103.8198' ,
-            "query": 'coffee'
+            "query": 'coffee',
+            "sortByDistance": 1
         }
     })
 .then(function(response){
@@ -41,16 +42,19 @@ function testFourSqAPI(){
 });
 
 }
-
+*/
 // create a function where if i hover my cursor in map, it will indicate lng,lat
 map.on("mousemove", function(e){ 
     $("#output").val(JSON.stringify(e.lngLat.wrap()));
+    $("#c-long").html(e.lngLat.lng);
+    $("#c-lat").html(e.lngLat.lat);
     clickedLatLng = e.lngLat;
     
 });
 
 map.on("click", function (){
-    $("#html-plot").val("longtitude: "+clickedLatLng.lng +" latitude: "+ clickedLatLng.lat);
+    $("#plot-long").html(clickedLatLng.lng);
+    $("#plot-lat").html(clickedLatLng.lat);
     
     for (let each_plot of plot_marker){
         each_plot.remove();
@@ -86,15 +90,16 @@ $("#search-button").click(function(){
     let fpCheck = $("#fairprice:checkbox").prop("checked");
     
     if (shengCheck == true){
-        stores.push($("#sheng:checkbox").attr("id"))
+        stores.push("shengsiong");
     };
     
     if (fpCheck == true){
-        stores.push($("#fairprice:checkbox").attr("id"))
+        stores.push("fairprice, FairPrice")
     };
 
     console.log(stores);
     let each = stores.toString();
+    console.log(each);
 
     /*Using search instead of explore*/
     axios.get(API_URL_FSQ + "/venues/search", {
@@ -103,11 +108,12 @@ $("#search-button").click(function(){
             "client_secret": CLIENT_SECRET, 
             "v":'20180323' , 
             "limit": 20 ,
-            /* if i add radius, json file is changed*/ 
             /*taking Long, lat from clicked*/
             "ll": clickedLatLng.lat + "," + clickedLatLng.lng ,
-            // "radius": 500,
-            "query": each
+            "radius": 1000,
+            "query": each,
+            "sortByDistance": 1,
+            "section":"supermarket"
         }
     }).then(function(response){
         // console.log(response);

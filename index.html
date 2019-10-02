@@ -18,15 +18,18 @@
     <title>4square and mapbox</title>
   </head>
   <body>
-   
     <div class="row h-100"> <!--personal reminder that you set height using h-100 in bootstrap-->
       <div class="col-3" id="finder">
         <h2>Supermarket Finder</h2>
         <div>
-          <textarea id="output" rows="3" disabled></textarea>
+          <h3>Current Location</h3>
+          <p>Longtitude: <span id="c-long"></span></p>
+          <p>Latitiude: <span id="c-lat"></span></p>
         </div>
         <div>
-          <textarea id="html-plot" rows="3" disabled></textarea>
+          <h3>Plotted Location</h3>
+          <p>Longtitude: <span id="plot-long"></span></p>
+          <p>Latitiude: <span id="plot-lat"></span></p>
         </div>
         <div>
           <button id="search-button">Start Search</input>
