@@ -4,6 +4,7 @@
 
 /* global variables */
 let all_markers = [];
+let plot_marker = [];
 
 /*Foursquare API. Constants are kept Capsed to differentiate them from Variables.*/
 const API_URL_FSQ = "https://api.foursquare.com/v2";
@@ -55,7 +56,20 @@ map.on("mousemove", function(e){
 map.on("click", function (){
     $("#html-plot").val("longtitude: "+clickedLatLng.lng +" latitude: "+ clickedLatLng.lat);
     
+    for (let each_plot of plot_marker){
+        each_plot.remove();
+    };
     
+    
+    plot_marker = [];
+    
+    let plot = new mapboxgl.Marker();
+            
+            plot.setLngLat([clickedLatLng.lng,clickedLatLng.lat]);
+            plot.addTo(map);
+    
+            plot_marker.push(plot);
+            
     console.log("current plot" + clickedLatLng.lat);
     console.log("current plot" + clickedLatLng.lng);
 });
@@ -90,14 +104,17 @@ $("#search-button").click(function(){
             "client_id": CLIENT_ID,
             "client_secret": CLIENT_SECRET, 
             "v":'20180323' , 
-            "limit": 1000 ,
-            "ll": '1.3521, 103.8198' ,
+            "limit": 50 ,
+            /* if i add radius, json file is changed*/ 
+            /*taking Long, lat from clicked*/
+            "ll": clickedLatLng.lat + "," + clickedLatLng.lng ,
+            "radius": 1000,
             "query": each
         }
     }).then(function(response){
-        console.log(response);
-        console.log(response.data.response.venues[0].name);
-        console.log(response.data.response.venues[0].location.address);
+        // console.log(response);
+        // console.log(response.data.response.venues[0].name);
+        // console.log(response.data.response.venues[0].location.address);
         
         
         $("#list").empty();
