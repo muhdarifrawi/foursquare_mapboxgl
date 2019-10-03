@@ -23,7 +23,7 @@ let map = new mapboxgl.Map({
 });
 
 let clickedLatLng = {};
-/*   
+   
 function testFourSqAPI(){
     axios.get(API_URL_FSQ + "/venues/explore", {
         params: {
@@ -32,7 +32,7 @@ function testFourSqAPI(){
             "v":'20180323' , 
             "limit": 50,
             "ll": '1.3521, 103.8198' ,
-            "query": 'coffee',
+            "query": 'shengsiong',
             "sortByDistance": 1
         }
     })
@@ -42,7 +42,7 @@ function testFourSqAPI(){
 });
 
 }
-*/
+
 // create a function where if i hover my cursor in map, it will indicate lng,lat
 map.on("mousemove", function(e){ 
     $("#output").val(JSON.stringify(e.lngLat.wrap()));
@@ -114,21 +114,32 @@ $("#search-button").click(function(){
     let stores = [];
     let shengCheck = $("#sheng:checkbox").prop("checked");
     let fpCheck = $("#fairprice:checkbox").prop("checked");
+    let giantCheck = $("#giant:checkbox").prop("checked");
+    let coldStorageCheck = $("#cold-storage:checkbox").prop("checked");
     
     if (shengCheck == true){
         stores.push("shengsiong");
     };
     
     if (fpCheck == true){
-        stores.push("fairprice, FairPrice")
+        stores.push(" fairprice")
+    };
+    
+    if (giantCheck == true){
+        stores.push(" giant")
+    };
+    
+    if (coldStorageCheck == true){
+        stores.push(" cold storage");
     };
 
-    if ($(":checkbox").prop("checked") == false){
+    if ($("input[type='checkbox']:checked").length == 0){
         alert("Please select a choice.");
         return ; 
     };
     
     console.log(stores);
+    console.log("Checked box: "+$("input[type='checkbox']:checked").length);
     let each = stores.toString();
     console.log(each);
     
@@ -141,16 +152,14 @@ $("#search-button").click(function(){
             "limit": 20 ,
             /*taking Long, lat from clicked*/
             "ll": clickedLatLng.lat + "," + clickedLatLng.lng ,
-            "radius": 1000,
             "query": each,
-            "sortByDistance": 1,
-            "section":"supermarket"
+            
         }
         
         
         
     }).then(function(response){
-        // console.log(response);
+        console.log(response);
         // console.log(response.data.response.venues[0].name);
         // console.log(response.data.response.venues[0].location.address);
         
@@ -190,3 +199,4 @@ $("#search-button").click(function(){
    
 });
 
+//issue as of 2nd Oct 2019, 1705h: checkbox prompt alert if anything other than Sheng Siong is selected 
