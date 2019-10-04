@@ -6,6 +6,7 @@
 let all_markers = [];
 let plot_marker = [];
 let stores = [];
+let testArray = [];
 
 /*Foursquare API. Constants are kept Capsed to differentiate them from Variables.*/
 const API_URL_FSQ = "https://api.foursquare.com/v2";
@@ -45,7 +46,7 @@ function testFourSqAPI(){
 
 }
 
-//create a function to push checkboxes value up to here and return back top three results.
+//create a function to push checkboxes value up to here and return back.
 function searchTopLocations(cata){
   
     
@@ -54,36 +55,31 @@ function searchTopLocations(cata){
             "client_id": CLIENT_ID,
             "client_secret": CLIENT_SECRET, 
             "v":'20180323' , 
-            "limit": 50 ,
+            "limit": 5 ,
             /*taking Long, lat from clicked*/
             "ll": clickedLatLng.lat + "," + clickedLatLng.lng ,
             "query": cata,
             "sortByDistance": 1
         }
     }).then(function(response){
-        console.log(response);
-        // console.log(response.data.response.venues[0].name); 
-        
-        // let lat1 = response.data.response.venues[0].location.lat;
-        // let lon1 = response.data.response.venues[0].location.lng;
+        console.log("Responded");
+        console.log(response.data.response.venues); 
+        let venues = response.data.response.venues
     
-        // let lat2 = clickedLatLng.lat;
-        // let lon2 =  clickedLatLng.lng;
-        
-        function deg2rad(deg)
-        {
-            return deg * (Math.PI/180);
-        }
-        
-        //create a for function to start calculating distances of every location. then use an if loop to find top three nearest by 10km. 
+        //create a for function to start calculating distances of every location. then use an if loop to find within 10km. 
+        testArray = [];
         
         function getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
+          console.log("calculator responded");
           
-          lat1 = response.data.response.venues[0].location.lat;
-          lon1 = response.data.response.venues[0].location.lng;
-          
+          for (let eachVenues of venues){
+        //   lat1 = venues[0].location.lat; 
+        //   lon1 = venues[0].location.lng;
+          let venueName = eachVenues.name;
+          lat1 = eachVenues.location.lat;
+          lon1 = eachVenues.location.lng;
           lat2 = clickedLatLng.lat;
-          lon2 =  clickedLatLng.lng;
+          lon2 = clickedLatLng.lng;
           
           var R = 6371; // Radius of the earth in km
           var dLat = deg2rad(lat2-lat1);  // deg2rad below
@@ -96,18 +92,31 @@ function searchTopLocations(cata){
           var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
           var d = R * c; // Distance in km
           
-          return d;
+          let testObject = {
+              name: venueName,
+              location: [lat1, lon1],
+              dist: d
+          };
+          
+          testArray.push(testObject);
+          
+          }
+          
+          return testArray;
+          
+          
         }
         
-        console.log(getDistanceFromLatLonInKm());
+        function deg2rad(deg)
+        {   
+            console.log("deg2 responded");
+            return deg * (Math.PI/180);
+        }
         
-        // let trees = response.data.response.venues;
-        
-        // for (let leaves of trees){
-        //     console.log("Shop name: "+leaves.name);  
-        //     console.log(leaves.location.lat+","+ leaves.location.lng);
-        // };
-        
+        // console.log(getDistanceFromLatLonInKm());
+        // return getDistanceFromLatLonInKm();
+        let info = getDistanceFromLatLonInKm();
+        pinMarkers(info);
     })
     
 };
@@ -215,7 +224,7 @@ $("#search-button").click(function(){
         return ; 
     };
     
-    console.log("stores: "+stores);
+    
     console.log("Checked box: "+$("input[type='checkbox']:checked").length);
     // let each = stores.toString();
     // console.log(each);
@@ -236,10 +245,11 @@ $("#search-button").click(function(){
             
     //     }
         
+}); 
         
-        
-    }).then(function(response){
-        console.log(response);
+function pinMarkers(info){
+        console.log("is this an array? ");
+        console.log(info);
         // console.log(response.data.response.venues[0].name);
         // console.log(response.data.response.venues[0].location.address);
         
@@ -251,19 +261,19 @@ $("#search-button").click(function(){
             each_marker.remove();
         }
         
-        let placeList = response.data.response.venues;
+        let placeList = info;
         all_markers = [];
         
-        for (let places of placeList){
+        for (let eachInfo of info){
             // console.log(places);
-            console.log(places.name);
+            console.log(eachInfo.name);
             
             let marker = new mapboxgl.Marker();
-            marker.setLngLat([places.location.lng,places.location.lat]);
+            marker.setLngLat([eachInfo.location[1],eachInfo.location[0]]);
             marker.addTo(map);
             
-            $("#list").append(`<li>${places.name}</li>`);
-            $("#list").append(`<ul><li>${places.location.address}</li></ul>`)
+            $("#list").append(`<li>${eachInfo.name}</li>`);
+            $("#list").append(`<ul><li>${eachInfo.dist}</li></ul>`)
             
             all_markers.push(marker);
             
@@ -274,7 +284,7 @@ $("#search-button").click(function(){
             };
             
            console.log(all_markers.length)
-    });
+    };
     
    
 
