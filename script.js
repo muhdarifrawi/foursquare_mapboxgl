@@ -5,6 +5,7 @@
 /* global variables */
 let all_markers = [];
 let plot_marker = [];
+let stores = [];
 
 /*Foursquare API. Constants are kept Capsed to differentiate them from Variables.*/
 const API_URL_FSQ = "https://api.foursquare.com/v2";
@@ -30,18 +31,86 @@ function testFourSqAPI(){
             "client_id": CLIENT_ID,
             "client_secret": CLIENT_SECRET, 
             "v":'20180323' , 
-            "limit": 50,
+            "limit": 1,
             "ll": '1.3521, 103.8198' ,
-            "query": 'shengsiong',
+            "query": 'coffee',
             "sortByDistance": 1
         }
     })
 .then(function(response){
-    console.log(response.data.response.groups[0].items);
-    console.log(response.data.response.groups[0].items[0].venue.name);
+    console.log(response);
+    console.log("Test Response A: "+response.data.response.groups[0].name);
+    console.log("Test response B: "+response.data.response.groups[0].items[0].venue.name);
 });
 
 }
+
+//create a function to push checkboxes value up to here and return back top three results.
+function searchTopLocations(cata){
+  
+    
+    axios.get(API_URL_FSQ + "/venues/search", {
+        params: {
+            "client_id": CLIENT_ID,
+            "client_secret": CLIENT_SECRET, 
+            "v":'20180323' , 
+            "limit": 50 ,
+            /*taking Long, lat from clicked*/
+            "ll": clickedLatLng.lat + "," + clickedLatLng.lng ,
+            "query": cata,
+            "sortByDistance": 1
+        }
+    }).then(function(response){
+        console.log(response);
+        // console.log(response.data.response.venues[0].name); 
+        
+        // let lat1 = response.data.response.venues[0].location.lat;
+        // let lon1 = response.data.response.venues[0].location.lng;
+    
+        // let lat2 = clickedLatLng.lat;
+        // let lon2 =  clickedLatLng.lng;
+        
+        function deg2rad(deg)
+        {
+            return deg * (Math.PI/180);
+        }
+        
+        //create a for function to start calculating distances of every location. then use an if loop to find top three nearest by 10km. 
+        
+        function getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
+          
+          lat1 = response.data.response.venues[0].location.lat;
+          lon1 = response.data.response.venues[0].location.lng;
+          
+          lat2 = clickedLatLng.lat;
+          lon2 =  clickedLatLng.lng;
+          
+          var R = 6371; // Radius of the earth in km
+          var dLat = deg2rad(lat2-lat1);  // deg2rad below
+          var dLon = deg2rad(lon2-lon1); 
+          var a = 
+            Math.sin(dLat/2) * Math.sin(dLat/2) +
+            Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * 
+            Math.sin(dLon/2) * Math.sin(dLon/2)
+            ; 
+          var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+          var d = R * c; // Distance in km
+          
+          return d;
+        }
+        
+        console.log(getDistanceFromLatLonInKm());
+        
+        // let trees = response.data.response.venues;
+        
+        // for (let leaves of trees){
+        //     console.log("Shop name: "+leaves.name);  
+        //     console.log(leaves.location.lat+","+ leaves.location.lng);
+        // };
+        
+    })
+    
+};
 
 // create a function where if i hover my cursor in map, it will indicate lng,lat
 map.on("mousemove", function(e){ 
@@ -111,26 +180,34 @@ $("#search-button").click(function(){
     //  console.log($("#sheng:checkbox").prop("checked"));
     //  console.log($("#fairprice:checkbox").prop("checked"));
     
-    let stores = [];
+    // let stores = [];
     let shengCheck = $("#sheng:checkbox").prop("checked");
     let fpCheck = $("#fairprice:checkbox").prop("checked");
     let giantCheck = $("#giant:checkbox").prop("checked");
     let coldStorageCheck = $("#cold-storage:checkbox").prop("checked");
     
     if (shengCheck == true){
-        stores.push("shengsiong");
+        // stores.push(" shengsiong");
+        let cata = "shengsiong"
+        searchTopLocations(cata);
     };
     
     if (fpCheck == true){
-        stores.push(" fairprice")
+        // stores.push(" fairprice")
+        let cata = "fairprice"
+        searchTopLocations(cata);
     };
     
     if (giantCheck == true){
-        stores.push(" giant")
+        // stores.push(" giant")
+        let cata = "giant"
+        searchTopLocations(cata);
     };
     
     if (coldStorageCheck == true){
-        stores.push(" cold storage");
+        // stores.push(" cold storage");
+        let cata = "cold storage"
+        searchTopLocations(cata);
     };
 
     if ($("input[type='checkbox']:checked").length == 0){
@@ -138,23 +215,26 @@ $("#search-button").click(function(){
         return ; 
     };
     
-    console.log(stores);
+    console.log("stores: "+stores);
     console.log("Checked box: "+$("input[type='checkbox']:checked").length);
-    let each = stores.toString();
-    console.log(each);
+    // let each = stores.toString();
+    // console.log(each);
     
-    /*Using search instead of explore*/
-    axios.get(API_URL_FSQ + "/venues/search", {
-        params: {
-            "client_id": CLIENT_ID,
-            "client_secret": CLIENT_SECRET, 
-            "v":'20180323' , 
-            "limit": 20 ,
-            /*taking Long, lat from clicked*/
-            "ll": clickedLatLng.lat + "," + clickedLatLng.lng ,
-            "query": each,
+    // /*Using search instead of explore*/
+    // axios.get(API_URL_FSQ + "/venues/search", {
+    //     params: {
+    //         "client_id": CLIENT_ID,
+    //         "client_secret": CLIENT_SECRET, 
+    //         "v":'20180323' , 
+    //         "limit": 50 ,
+    //         /*taking Long, lat from clicked*/
+    //         "ll": clickedLatLng.lat + "," + clickedLatLng.lng ,
+    //         "query": each,
+    //         "radius": 1000,
+    //         "sortByDistance": 1,
+    //         "intent": "checkin"
             
-        }
+    //     }
         
         
         
@@ -197,6 +277,4 @@ $("#search-button").click(function(){
     });
     
    
-});
 
-//issue as of 2nd Oct 2019, 1705h: checkbox prompt alert if anything other than Sheng Siong is selected 
