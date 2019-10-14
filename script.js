@@ -48,7 +48,6 @@ function testFourSqAPI(){
 
 //create a function to push checkboxes value up to here and return back.
 function searchTopLocations(cata){
-  
     axios.get(API_URL_FSQ + "/venues/search", {
         params: {
             "client_id": CLIENT_ID,
@@ -67,6 +66,7 @@ function searchTopLocations(cata){
     
         //create a for function to start calculating distances of every location. then use an if loop to find within 10km. 
         let testArray = [];
+        getDistanceFromLatLonInKm();
         
         function getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
           console.log("calculator responded");
@@ -100,10 +100,11 @@ function searchTopLocations(cata){
           if (testObject.dist <= 3){
             testArray.push(testObject);
             }
-            console.log("internal testArray")
-            console.log(testArray);
+            
+            
           }
-        
+        console.log("internal testArray")
+        console.log(testArray);
         }
         
         function deg2rad(deg)
@@ -117,7 +118,7 @@ function searchTopLocations(cata){
         //let info = getDistanceFromLatLonInKm();
         console.log("Axios test array")
         console.log(testArray)
-        pinMarkers();
+        pinMarkers(testArray);
         return;
     })
    
@@ -251,7 +252,7 @@ $("#search-button").click(function(){
         
 }); 
         
-function pinMarkers(){
+function pinMarkers(testArray){
         console.log("is this an array? ");
         console.log(testArray);
         // console.log(response.data.response.venues[0].name);
@@ -265,7 +266,7 @@ function pinMarkers(){
             each_marker.remove();
         }
         
-        let placeList = info;
+        let info=testArray;
         all_markers = [];
         
         for (let eachInfo of info){
