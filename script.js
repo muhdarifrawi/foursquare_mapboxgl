@@ -75,6 +75,7 @@ function searchTopLocations(cata){
         //   lat1 = venues[0].location.lat; 
         //   lon1 = venues[0].location.lng;
           let venueName = eachVenues.name;
+          let venueAddress = eachVenues.location.address;
           lat1 = eachVenues.location.lat;
           lon1 = eachVenues.location.lng;
           lat2 = clickedLatLng.lat;
@@ -94,6 +95,7 @@ function searchTopLocations(cata){
           let testObject = {
               name: venueName,
               location: [lat1, lon1],
+              address: venueAddress,
               dist: d
           };
           // limit distance to 3km
@@ -278,7 +280,7 @@ function pinMarkers(testArray){
             marker.addTo(map);
             
             $("#list").append(`<li>${eachInfo.name}</li>`);
-            $("#list").append(`<ul><li>${eachInfo.dist}</li></ul>`)
+            $("#list").append(`<ul><li>${eachInfo.address}</li></ul>`)
             
             all_markers.push(marker);
             
