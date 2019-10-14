@@ -18,3 +18,30 @@ html, body{
     border-radius: 50%;
     cursor: pointer;
 }
+
+.navbar{
+    background-color:rgba(34, 242, 121, 0.8);
+}
+
+.navbar-brand{
+    background-position: center;
+}
+
+#current-location{
+    background-color:rgba(74, 217, 134, 1);
+    height:50%;
+}
+
+#plotted-location{
+    background-color:rgba(74, 217, 134, 1);
+    height:50%;
+}
+
+#store-select{
+    background-color:rgba(34, 242, 121, 1);
+}
+
+#results{
+    
+    background-color:rgba(34, 242, 121, 1);
+}

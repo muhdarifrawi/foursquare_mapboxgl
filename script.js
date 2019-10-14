@@ -6,7 +6,7 @@
 let all_markers = [];
 let plot_marker = [];
 let stores = [];
-let testArray = [];
+//let testArray = [];
 
 /*Foursquare API. Constants are kept Capsed to differentiate them from Variables.*/
 const API_URL_FSQ = "https://api.foursquare.com/v2";
@@ -49,7 +49,6 @@ function testFourSqAPI(){
 //create a function to push checkboxes value up to here and return back.
 function searchTopLocations(cata){
   
-    
     axios.get(API_URL_FSQ + "/venues/search", {
         params: {
             "client_id": CLIENT_ID,
@@ -62,12 +61,12 @@ function searchTopLocations(cata){
             "sortByDistance": 1
         }
     }).then(function(response){
-        console.log("Responded");
+        console.log("Axios Responded");
         console.log(response.data.response.venues); 
         let venues = response.data.response.venues
     
         //create a for function to start calculating distances of every location. then use an if loop to find within 10km. 
-        testArray = [];
+        let testArray = [];
         
         function getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
           console.log("calculator responded");
@@ -97,14 +96,14 @@ function searchTopLocations(cata){
               location: [lat1, lon1],
               dist: d
           };
-          
-          testArray.push(testObject);
-          
+          // limit distance to 3km
+          if (testObject.dist <= 3){
+            testArray.push(testObject);
+            }
+            console.log("internal testArray")
+            console.log(testArray);
           }
-          
-          return testArray;
-          
-          
+        
         }
         
         function deg2rad(deg)
@@ -114,11 +113,14 @@ function searchTopLocations(cata){
         }
         
         // console.log(getDistanceFromLatLonInKm());
-        // return getDistanceFromLatLonInKm();
-        let info = getDistanceFromLatLonInKm();
-        pinMarkers(info);
+        //return getDistanceFromLatLonInKm();
+        //let info = getDistanceFromLatLonInKm();
+        console.log("Axios test array")
+        console.log(testArray)
+        pinMarkers();
+        return;
     })
-    
+   
 };
 
 // create a function where if i hover my cursor in map, it will indicate lng,lat
@@ -198,12 +200,14 @@ $("#search-button").click(function(){
     if (shengCheck == true){
         // stores.push(" shengsiong");
         let cata = "shengsiong"
+        console.log("jumped from shengsiong")
         searchTopLocations(cata);
     };
     
     if (fpCheck == true){
         // stores.push(" fairprice")
         let cata = "fairprice"
+        console.log("kumped from NTUC")
         searchTopLocations(cata);
     };
     
@@ -247,9 +251,9 @@ $("#search-button").click(function(){
         
 }); 
         
-function pinMarkers(info){
+function pinMarkers(){
         console.log("is this an array? ");
-        console.log(info);
+        console.log(testArray);
         // console.log(response.data.response.venues[0].name);
         // console.log(response.data.response.venues[0].location.address);
         
