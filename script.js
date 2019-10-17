@@ -6,7 +6,29 @@
 let all_markers = [];
 let plot_marker = [];
 let stores = [];
-//let testArray = [];
+let testArray = [];
+let listNumber = 0;
+
+$("#shengsiong-list").click(function(){
+    $("#navbarDropdown").text("Sheng Siong")
+    listNumber = 1;
+});
+
+$("#ntuc-list").click(function(){
+    $("#navbarDropdown").text("NTUC Fairprice")
+    listNumber = 2;
+});
+
+$("#giant-list").click(function(){
+    $("#navbarDropdown").text("Giant")
+    listNumber = 3;
+});
+
+$("#coldstorage-list").click(function(){
+    $("#navbarDropdown").text("Cold Storage")
+    listNumber = 4;
+});
+
 
 /*Foursquare API. Constants are kept Capsed to differentiate them from Variables.*/
 const API_URL_FSQ = "https://api.foursquare.com/v2";
@@ -63,9 +85,12 @@ function searchTopLocations(cata){
         console.log("Axios Responded");
         console.log(response.data.response.venues); 
         let venues = response.data.response.venues
-    
+        
         //create a for function to start calculating distances of every location. then use an if loop to find within 10km. 
-        let testArray = [];
+        testArray = [];
+        
+        
+        
         getDistanceFromLatLonInKm();
         
         function getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
@@ -167,7 +192,6 @@ map.on("click", function (){
 
 
 //function reset will zoom out and clear the marker
-
 $("#reset-button").click(function(){
     
     for (let each_plot of plot_marker){
@@ -190,43 +214,37 @@ $("#reset-button").click(function(){
 
 //create a function where if  i click search, it will return names to me.
 $("#search-button").click(function(){
-    // console.log("clicked");
-    //  console.log($("#sheng:checkbox").prop("checked"));
-    //  console.log($("#fairprice:checkbox").prop("checked"));
     
-    // let stores = [];
-    let shengCheck = $("#sheng:checkbox").prop("checked");
-    let fpCheck = $("#fairprice:checkbox").prop("checked");
+    // let shengCheck = $("#sheng:checkbox").prop("checked");
+    
+    // let fpCheck = $("#fairprice:checkbox").prop("checked");
+    
     let giantCheck = $("#giant:checkbox").prop("checked");
     let coldStorageCheck = $("#cold-storage:checkbox").prop("checked");
     
-    if (shengCheck == true){
-        // stores.push(" shengsiong");
+    if (listNumber == 1){
         let cata = "shengsiong"
         console.log("jumped from shengsiong")
         searchTopLocations(cata);
     };
     
-    if (fpCheck == true){
-        // stores.push(" fairprice")
+    if (listNumber == 2){
         let cata = "fairprice"
         console.log("kumped from NTUC")
         searchTopLocations(cata);
     };
     
-    if (giantCheck == true){
-        // stores.push(" giant")
+    if (listNumber == 3){
         let cata = "giant"
         searchTopLocations(cata);
     };
     
-    if (coldStorageCheck == true){
-        // stores.push(" cold storage");
+    if (listNumber == 4){
         let cata = "cold storage"
         searchTopLocations(cata);
     };
 
-    if ($("input[type='checkbox']:checked").length == 0){
+    if (listNumber != 1 || 2 || 3 || 4){
         alert("Please select a choice.");
         return ; 
     };
