@@ -22,7 +22,7 @@
       <span class="navbar-brand"><h2>Supermarket Finder</h2></span>
       
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
+        <ul class="navbar-nav ml-auto">
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Select Supermarket
@@ -37,90 +37,53 @@
             </div>
           </li>
         </ul>
+        
+        <button class="btn btn-outline-success mr-2 my-2 my-sm-0" type="submit" id="search-button">Search</button>
+        <button class="btn btn-outline-success mr-2 my-2 my-sm-0" type="submit" id="clear-plot">Clear Plot</button>
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="reset-button">Reset Map</button>
+        
       </div>
     </nav>
     
   <div class="container-fluid m-0 h-100">
-    <div class="row p-0 h-75"> 
-      <div class="col-3 p-0" id="finder">
-        <div class="row" id="current-location">
-          <div class="col pl-5">
-            <div class="row">
-              <h3>Current Location</h3>
-            </div>
-            <div class="row">
-              <p>Longtitude:</p>
-            </div>
-            <div class="row h-25">
-              <p id="c-long"></p>
-            </div>
-            <div class="row">
-              <p>Latitiude:</p>
-            </div>
-            <div class="row h-25">
-              <p><span id="c-lat"></span></p>
-            </div>
-          </div>
-        </div>
-        <div class="row" id="plotted-location">
-          <div class="col pl-5">
-            <div class="row">
-              <h3>Plotted Location</h3>
-            </div>
-            <div class="row">
-              <p>Longtitude: </p>
-            </div>
-            <div class="row h-25">
-              <p id="plot-long"></p>
-            </div>
-            <div class="row">
-              <p>Latitiude: </p>
-            </div>
-            <div class="row h-25">
-              <p id="plot-lat"></p>
-            </div>
-          </div>
-        </div>
-        
-        
-        
+    <div class="row p-0 h-100"> 
+      <div class="col-3 p-1 m-0" id="results">
+        <h3>Results</h3>
+        <ul id="list" class="p-1"></ul>
       </div>
       <div class="col-9 p-0">
         <div id="map"></div>
       </div>
     </div>
-    <div class="row p-0 h-25">
-      <div class="col-3 px-auto" id="store-select">
-        <h3>Store Select</h3>
-        <div class="row">
-          <div class="col">
-            <input type="checkbox" id="sheng">Sheng Siong</input>
-          </br>
-            <input type="checkbox" id="fairprice">FairPrice</input>
-          </div>
-          <div class="col">
-            <input type="checkbox" id="giant">Giant</input>
-          </br>
-            <input type="checkbox" id="cold-storage">Cold Storage</input>
-          </div>
+    <div class="row p-0" id="finder">
+     <div class="col"> 
+      
+        <div class="row" id="current-location">
+          
+            <div class="col-4"><h5>Current Location</h5></div>
+           
+            <div class="col-4">Longtitude:<span id="c-long"></span></div>
+            
+            <div class="col-4">Latitiude: <span id="c-lat"></span></div>
+            
+        </div>
+        <div class="row" id="plotted-location">
+          
+            
+              <div class="col-4"><h5>Plotted Location</h5></div>
+           
+              <div class="col-4">Longtitude: <span id="plot-long"></span></div>
+           
+              <div class="col-4">Latitiude: <span id="plot-lat"></span><div>
+          
         </div>
         
-        <div class="row py-2">
-          <div class="col">
-            <button id="reset-button">Reset Map</input>
-          </div>
-          <div class="col">
-            <button id="search-button">Start Search</input>
-          </div>
-        </div>
-      </div>
-      <div class="col-9 p-0" id="results">
-        <h3>Results</h3>
-        <ul id="list"></ul>
-      </div>
-    </div>
+        
+        </div><!--col class end div -->
+      </div><!--row class end div -->
     
-  </div>
+    
+  </div><!--container closing div-->
    
 
     <!-- Optional JavaScript -->

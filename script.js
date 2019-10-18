@@ -86,7 +86,7 @@ function searchTopLocations(cata){
         console.log(response.data.response.venues); 
         let venues = response.data.response.venues
         
-        //create a for function to start calculating distances of every location. then use an if loop to find within 10km. 
+        //create a for function to start calculating distances of every location. then use an if loop to find within 3km. 
         testArray = [];
         
         
@@ -190,6 +190,13 @@ map.on("click", function (){
     console.log(clickedLatLng);
 });
 
+//locate user
+map.addControl(new mapboxgl.GeolocateControl({
+    positionOptions: {
+    enableHighAccuracy: true
+    },
+    trackUserLocation: true
+    }));
 
 //function reset will zoom out and clear the marker
 $("#reset-button").click(function(){
@@ -210,6 +217,13 @@ $("#reset-button").click(function(){
         center: [103.8198, 1.3521]
     });
 
+});
+
+//clear button clear only the plot marker
+$("#clear-plot").click(function(){
+    for (let each_plot of plot_marker){
+        each_plot.remove();
+    };
 });
 
 //create a function where if  i click search, it will return names to me.
@@ -244,7 +258,7 @@ $("#search-button").click(function(){
         searchTopLocations(cata);
     };
 
-    if (listNumber != 1 || 2 || 3 || 4){
+    if (listNumber == 0){
         alert("Please select a choice.");
         return ; 
     };
@@ -297,19 +311,21 @@ function pinMarkers(testArray){
             marker.setLngLat([eachInfo.location[1],eachInfo.location[0]]);
             marker.addTo(map);
             
-            $("#list").append(`<li>${eachInfo.name}</li>`);
+            $("#list").append(`<li><strong>${eachInfo.name}</strong></li>`);
             $("#list").append(`<ul><li>${eachInfo.address}</li></ul>`)
             
             all_markers.push(marker);
             
-            }
             
             if (all_markers.length == 0){
               $("#list").append(`<li>No Results Found</li>`);  
             };
             
            console.log(all_markers.length)
-    };
-    
    
+           
+};
+    
+
+};
 
