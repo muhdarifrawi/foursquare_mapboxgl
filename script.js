@@ -329,3 +329,5 @@ function pinMarkers(testArray){
 
 };
 
+//welcome and instructions
+alert("Welcome to Supermarket Finder! \n Click on the icon at the top right of the map to locate where you are. \n Or click on map to plot where you'd like to be.")
