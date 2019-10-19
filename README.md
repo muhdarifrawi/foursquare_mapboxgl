@@ -1,3 +1,6 @@
+# Supermarket Finder
+This idea came to mind while I was thinking where the nearest supermarket would be. Here in Singapore, there are several Supermarket chains that ranges from the expensive side of thing to the cheaper ones. So this project aims to quickly locate the preferred chain that the user would like to go to using selectors.
+
 ## Getting Started
 
 There are no setup or installation required for this application. Simply go to the following webpage (insert here) to get started. If you wish to run a local file, click on the clone file button to download a copy of this application.
