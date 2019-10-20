@@ -97,8 +97,6 @@ function searchTopLocations(cata){
           console.log("calculator responded");
           
           for (let eachVenues of venues){
-        //   lat1 = venues[0].location.lat; 
-        //   lon1 = venues[0].location.lng;
           let venueName = eachVenues.name;
           let venueAddress = eachVenues.location.address;
           lat1 = eachVenues.location.lat;
@@ -130,8 +128,7 @@ function searchTopLocations(cata){
             
             
           }
-        console.log("internal testArray")
-        console.log(testArray);
+        
         }
         
         function deg2rad(deg)
@@ -139,12 +136,6 @@ function searchTopLocations(cata){
             console.log("deg2 responded");
             return deg * (Math.PI/180);
         }
-        
-        // console.log(getDistanceFromLatLonInKm());
-        //return getDistanceFromLatLonInKm();
-        //let info = getDistanceFromLatLonInKm();
-        console.log("Axios test array")
-        console.log(testArray)
         pinMarkers(testArray);
         return;
     })
@@ -184,10 +175,7 @@ map.on("click", function (){
         zoom: 14,
         center: clickedLatLng
     });
-            
-    console.log("current plot" + clickedLatLng.lat);
-    console.log("current plot" + clickedLatLng.lng);
-    console.log(clickedLatLng);
+  
 });
 
 //locate user
@@ -228,11 +216,7 @@ $("#clear-plot").click(function(){
 
 //create a function where if  i click search, it will return names to me.
 $("#search-button").click(function(){
-    
-    // let shengCheck = $("#sheng:checkbox").prop("checked");
-    
-    // let fpCheck = $("#fairprice:checkbox").prop("checked");
-    
+
     let giantCheck = $("#giant:checkbox").prop("checked");
     let coldStorageCheck = $("#cold-storage:checkbox").prop("checked");
     
@@ -263,35 +247,12 @@ $("#search-button").click(function(){
         return ; 
     };
     
-    
-    console.log("Checked box: "+$("input[type='checkbox']:checked").length);
-    // let each = stores.toString();
-    // console.log(each);
-    
-    // /*Using search instead of explore*/
-    // axios.get(API_URL_FSQ + "/venues/search", {
-    //     params: {
-    //         "client_id": CLIENT_ID,
-    //         "client_secret": CLIENT_SECRET, 
-    //         "v":'20180323' , 
-    //         "limit": 50 ,
-    //         /*taking Long, lat from clicked*/
-    //         "ll": clickedLatLng.lat + "," + clickedLatLng.lng ,
-    //         "query": each,
-    //         "radius": 1000,
-    //         "sortByDistance": 1,
-    //         "intent": "checkin"
-            
-    //     }
-        
 }); 
         
 function pinMarkers(testArray){
         console.log("is this an array? ");
         console.log(testArray);
-        // console.log(response.data.response.venues[0].name);
-        // console.log(response.data.response.venues[0].location.address);
-        
+
         
         $("#list").empty();
         

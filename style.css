@@ -16,8 +16,6 @@ ul {
 }
 
 .marker {
-    /*background-image:url("circle.png");*/
-    /*background-size: cover;*/
     background-color:red;
     width: 20px;
     height: 20px;
@@ -26,7 +24,6 @@ ul {
 }
 
 .navbar{
-    /*background-color:rgba(34, 242, 121, 0.8);*/
     background-image: linear-gradient(to top, #0ba360 0%, #3cba92 100%);
 }
 
@@ -49,8 +46,6 @@ ul {
 }
 
 #results{
-    
-    /*background-color:rgba(34, 242, 121, 1);*/
     background-image: linear-gradient(-20deg, #00cdac 0%, #8ddad5 100%);
 }
 
