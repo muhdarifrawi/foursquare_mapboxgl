@@ -20,6 +20,7 @@ Coded using: HTML/CSS with Bootstrap and JavaScript with JQuery.
 Additional library: Axios
 
 ## Features
+To see a quick video demonstration of the project, click [here](https://youtu.be/u4c2SdzyEl0).
 
 Opening up the application, users would be greeted by an alert box giving simple instructions on how to use the map. User can either press on the map to plot where they are or click on the icon on the top right of the map to locate where they are. Dismissing the alert window, user will see a one paged webpage with a map, a navbar at the top and an empty results section on the left. 
 
