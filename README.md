@@ -3,11 +3,11 @@ This idea came to mind while I was thinking where the nearest supermarket would 
 
 ## Getting Started
 
-There are no setup or installation required for this application. Simply go to the following webpage (insert here) to get started. If you wish to run a local file, click on the clone file button to download a copy of this application.
+There are no setup or installation required for this application. Simply go to the following [webpage](https://muhdarifrawi.github.io/foursquare_mapboxgl/#) to get started. If you wish to run a local file, click on the clone file button to download a copy of this application.
 
 ## UI/UX
 
-Potential users of this site may be people older than 21 years of age. For the younger users on this range, they would likley not have any issues using any kind of interface. However, the older ones may need a foolproof design so that they can navigate the page easier. 
+Potential users of this site may be people older than 21 years of age. For the younger users on this range, they would likely not have any issues using any kind of interface. However, the older ones may need a foolproof design so that they can navigate the page easier. 
 
 The conceptual design in mind was to create a one page application with checkboxes to indicate which supermarket users wish to look for and by clicking on the map, they are able to plot the location they would like to use as the midpoint. 
 
@@ -15,7 +15,9 @@ The conceptual design in mind was to create a one page application with checkbox
 
 API used: Mapbox GL and Foursquare API
 
-Coded using: HTML/CSS with Bootstrap, JavaScript and JQuery
+Coded using: HTML/CSS with Bootstrap and JavaScript with JQuery.
+
+Additional library: Axios
 
 ## Features
 
