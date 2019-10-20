@@ -27,6 +27,8 @@ Clicking the *search button* would locate the nearest supermarket requested with
 
 If the user is done searching, they can click on the *reset map* button to reset the map back to its original state.
 
+If user wishes to look for the exact longtitude and latitiude, they can scroll down below the map to look at their currecnt location and their plotted position.
+
 ## Testing
 
 Testing of the application are done manually. No auto testing are done with this project. 
@@ -46,3 +48,29 @@ On the *select supermarket* dropdown list, the dropdown lists down the four supe
 After plotting and choosing the supermarket, user will need to click on the *search* button. Doing so will let the application start listing down the nearest supermarket within the range set in the code. Markers would also appear on the map. Something that I might have overlooked was assigning marker pop-ups to indicate the addresses. 
 
 Clicking on *reset map* button clears all plots and markers on map.  
+
+Current location is indicated when the mouse hovers over the map. Plotting the map does indicate the current location of the user 
+
+## Issues and future implementations
+
+Issues that stands out are as follows: 
+
+1. Alert window - The alert window pops up before the map fully loads. Ideally it would be better for the map to load fully before the window pops up.
+
+2. Search user icon - Search user icon is not linked to the reset map button. Hence it takes a few more steps to reset the map. 
+
+3. Unable to search multiple selection - Initial idea was to use checkboxes to look for multiple selections. However the API only returns one type of supermarket during the search. Given more time, this would be looked into more and be implemented.
+
+4. Lists not linked to map - This makes it hard for user to locate where the supermarket locations are. 
+
+## Deployment 
+
+The application is deployed using github and can be accessed through [here](https://muhdarifrawi.github.io/foursquare_mapboxgl/#). 
+
+## Credits
+
+Haversine formula for limiting the radius of search is thanks to the [movable-type website](https://www.movable-type.co.uk/scripts/latlong.html) and a guide from [stackoverflow](https://stackoverflow.com/questions/27928/calculate-distance-between-two-latitude-longitude-points-haversine-formula).
+
+Amazing CSS color gradients are thanks to [CSS Gradients](https://webgradients.com/).
+
+**This project is made for educational purpose only**
